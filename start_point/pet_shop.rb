@@ -70,11 +70,11 @@ def customer_can_afford_pet(customer, potential_pet)
   return true
 end
 
-def sell_pet_to_customer(pet_shop_info, pet_sold, customer)
-  if pet_sold != nil and customer_can_afford_pet(customer, pet_sold) == true
-    customer[:pets].push(pet_sold)
-    pet_shop_info[:admin][:pets_sold] += 1
-    customer[:cash] -= pet_sold[:price]
-    pet_shop_info[:admin][:total_cash] += pet_sold[:price]
+def sell_pet_to_customer(pet_shop_info, pet_to_sell, customer)
+  if pet_to_sell != nil && customer_can_afford_pet(customer, pet_to_sell) == true
+    add_pet_to_customer(customer, pet_to_sell)
+    increase_pets_sold(pet_shop_info, 1)
+    remove_customer_cash(customer, pet_to_sell[:price])
+    add_or_remove_cash(pet_shop_info, pet_to_sell[:price])
   end
 end
